@@ -1,0 +1,27 @@
+<template id="fancy-p-from-template">
+  <style>
+    p {
+      font-size: 5rem;
+      font-style: italic;
+      color: red;
+    }
+  </style>
+
+  <p>
+    <slot/>
+  </p>
+</template>
+
+<script>
+  class FancyP extends HTMLElement {
+    constructor () {
+      super()
+      const shadowRoot = this.attachShadow({ mode: 'open' })
+      const t = document.currentScript.ownerDocument.querySelector('#fancy-p-from-template')
+      const instance = t.content.cloneNode(true)
+      shadowRoot.appendChild(instance)
+    }
+  }
+
+  window.customElements.define('fancy-p', FancyP)
+</script>
